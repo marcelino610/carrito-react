@@ -1,0 +1,28 @@
+nav {
+    background-color: goldenrod;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+}
+
+nav h1 {
+    display: inline;
+    grid-column: 2 / 6;
+    background-color: palegoldenrod;
+}
+
+nav div {
+    grid-column: 7 / 15;
+    background-color: red;
+}
+
+nav p {
+    display: inline;
+    margin: 0 5%;
+    cursor: pointer;
+}
