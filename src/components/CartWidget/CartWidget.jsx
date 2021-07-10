@@ -4,7 +4,7 @@ import './CartWidget.css'
 
 function CartWidget(props) {
     return (
-            <img className="y-centered" src={Cart} height={props.size} width={props.size} alt={props.alt} />
+            <img className="xy-centered" src={Cart} height={props.size} width={props.size} alt={props.alt} />
     )
 };
 

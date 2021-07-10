@@ -5,12 +5,12 @@ import ItemCount from './components/ItemCount/ItemCount'
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <br />
-      <br />
-      <br />
-      <ItemListContainer greeting="Hola, mundo! (por fin me sale esto ^.^)" />
-      <ItemCount />
+      <div>
+        <NavBar />
+      </div>
+      <div>
+        <ItemListContainer />
+      </div>
     </div>
   );
 }
