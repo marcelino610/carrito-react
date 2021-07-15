@@ -1,13 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ItemList from './ItemList/ItemList'
 import './item-list-container.css'
-import productos from '../products'
 
-function ItemListContainer(props) {
-
+function ItemListContainer() {
     return (
         <div>
-            <ItemList products={productos} />
+            <ItemList />
         </div>
     )
 }
