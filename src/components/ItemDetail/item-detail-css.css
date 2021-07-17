@@ -1,0 +1,8 @@
+#info-container {
+    display: grid;
+    grid-template-columns: 40%  60%;
+}
+
+#img img {
+    width: 100%;
+}

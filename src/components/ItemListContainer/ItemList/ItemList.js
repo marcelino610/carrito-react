@@ -5,7 +5,6 @@ import productos from '../../products'
 
 function ItemList() {
     const [productsToDisplay, setProductsToDisplay] = useState([]);
-    console.log(1);
     let productsPromise = () => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
