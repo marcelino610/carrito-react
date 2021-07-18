@@ -1,6 +1,7 @@
 import React from 'react'
 import ItemCount from '../../../ItemCount/ItemCount'
 import './item-css.css'
+import { NavLink } from 'react-router-dom'
 
 function Item({ itemId, itemTitle, itemPrice, itemImageUrl, stock }) {
     return (
@@ -9,7 +10,7 @@ function Item({ itemId, itemTitle, itemPrice, itemImageUrl, stock }) {
                 <img src={ itemImageUrl } height="144px" width="233px" alt="Imagen del producto"/>
             </div>
             <div className="info-container">
-                <h2>{ itemTitle }</h2>
+                <h2><NavLink to={`/item/${itemId}`}>{ itemTitle }</NavLink></h2>
                 <h3>${ itemPrice }</h3>
                 <div className="ic-container">
                     <ItemCount stock={stock} />

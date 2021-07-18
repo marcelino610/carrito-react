@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from 'react'
+import {useParams} from 'react-router-dom'
 import Item from './Item/Item'
 import './itemlist-css.css'
 import productos from '../../products'
 
 function ItemList() {
     const [productsToDisplay, setProductsToDisplay] = useState([]);
-    let productsPromise = () => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(productos)
-            }, 2000)
-        })
-    }
-    productsPromise().then(resolve => setProductsToDisplay(resolve))
+    const array = productos
+    const { catId } = useParams()
+
+    useEffect(() => {
+        setProductsToDisplay([])
+        const productsPromise = () => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    if (catId) {
+                        let filtered = array.filter(el => el.category === catId)
+                        resolve(filtered)
+                    } else {
+                        resolve(array)
+                    }
+                }, 2000)
+            })
+        }
+        productsPromise().then(resolve => setProductsToDisplay(resolve))
+    }, [catId, array])
 
     return (
         <div id="itemList">

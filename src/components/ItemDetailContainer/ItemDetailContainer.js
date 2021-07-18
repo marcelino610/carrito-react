@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router'
 import './itDetContainer-css.css'
 import ItemDetail from '../ItemDetail/ItemDetail'
+import Productos from '../products'
 
 function ItemDetailContainer(props) {
     const [details, setDetails] = useState(false)
+    const { id } = useParams()
 
     const getDetails = () => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve({name: "Nombre del producto", price: "3000", description: "Descripción detallada de las características del producto", src: "https://definicion.de/wp-content/uploads/2009/06/producto.png",
-            })
+                let detailsRequired = Productos.filter(el => el.id == id)//el.id es number y is es string, por eso '==' en lugar de '==='
+                resolve(detailsRequired[0])
             }, 2000)
         })
     }
@@ -17,7 +20,7 @@ function ItemDetailContainer(props) {
 
     return details ? (
     <div>
-        <ItemDetail title={details.name} price={details.price} description={details.description} imgSrc={details.src} />
+        <ItemDetail title={details.title} price={details.price} description={details.description} imgSrc={details.imageUrl} />
     </div>
     ) : (
         <div></div>
