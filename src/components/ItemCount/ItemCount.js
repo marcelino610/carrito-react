@@ -4,7 +4,7 @@ import '../my-css.css'
 import minus from '../minus.png'
 import add from '../add.png'
 
-function ItemCount({stock}) {
+function ItemCount({ stock, onAdd  }) {
     const [count, setCount] = useState(0)
 
     return (
@@ -14,7 +14,12 @@ function ItemCount({stock}) {
                 <p className="text-18">{count}</p>
                 <img className={count === stock ? "disabled" : ""} src={add} onClick={() => { count === stock ? setCount(count) : setCount(count + 1) }} height="20px" width="20px" alt="mas item" />
             </div>
-            <button onClick={() => setCount(0) }>Agregar al carrito</button>
+            <button onClick={() => {
+                onAdd(count)
+                setCount(0)
+                }}>
+                Agregar al carrito
+                </button>
         </div>
     )
 }

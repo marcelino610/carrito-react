@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './item-detail-css.css'
+import ItemCount from '../ItemCount/ItemCount'
 
 function ItemDetail(props) {
+    const [addToCart, setAddToCart] = useState(false)
+
+    function finish(val) {
+        setAddToCart(val)
+    }
     return (
         <div id="info-container">
             <div id="img">
@@ -19,6 +26,7 @@ function ItemDetail(props) {
                 <h2>
                     <p>${props.price}</p>
                 </h2>
+                {addToCart ? <Link to='/cart'><button>Terminar mi compra</button></Link> : <ItemCount stock={props.stock} onAdd={finish} />}
             </div>
         </div>
     )

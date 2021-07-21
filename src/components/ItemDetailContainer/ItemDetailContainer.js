@@ -11,7 +11,7 @@ function ItemDetailContainer(props) {
     const getDetails = () => {
         return new Promise((resolve) => {
             setTimeout(() => {
-                let detailsRequired = Productos.filter(el => el.id == id)//el.id es number y is es string, por eso '==' en lugar de '==='
+                let detailsRequired = Productos.filter(el => el.id == id)//'el.id' es number y 'id' es string, por eso '==' en lugar de '==='
                 resolve(detailsRequired[0])
             }, 2000)
         })
@@ -20,7 +20,7 @@ function ItemDetailContainer(props) {
 
     return details ? (
     <div>
-        <ItemDetail title={details.title} price={details.price} description={details.description} imgSrc={details.imageUrl} />
+        <ItemDetail title={details.title} price={details.price} description={details.description} imgSrc={details.imageUrl} stock={details.stock} />
     </div>
     ) : (
         <div></div>
