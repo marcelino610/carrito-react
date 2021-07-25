@@ -26,7 +26,7 @@ function ItemDetail(props) {
                 <h2>
                     <p>${props.price}</p>
                 </h2>
-                {addToCart ? <Link to='/cart'><button>Terminar mi compra</button></Link> : <ItemCount stock={props.stock} onAdd={finish} />}
+                {addToCart ? <Link to='/cart'><button>Terminar mi compra</button></Link> : <ItemCount product={props} onAdd={finish} />}
             </div>
         </div>
     )

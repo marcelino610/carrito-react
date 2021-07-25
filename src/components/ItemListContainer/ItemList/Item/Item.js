@@ -12,9 +12,9 @@ function Item({ itemId, itemTitle, itemPrice, itemImageUrl, stock }) {
             <div className="info-container">
                 <h2><NavLink to={`/item/${itemId}`}>{ itemTitle }</NavLink></h2>
                 <h3>${ itemPrice }</h3>
-                <div className="ic-container">
+                {/*<div className="ic-container">
                     <ItemCount stock={stock} />
-                </div>
+                </div>*/}
             </div>
         </div>
     )

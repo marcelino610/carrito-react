@@ -20,7 +20,7 @@ function ItemDetailContainer(props) {
 
     return details ? (
     <div>
-        <ItemDetail title={details.title} price={details.price} description={details.description} imgSrc={details.imageUrl} stock={details.stock} />
+        <ItemDetail id={details.id} title={details.title} price={details.price} description={details.description} imgSrc={details.imageUrl} stock={details.stock} />
     </div>
     ) : (
         <div></div>

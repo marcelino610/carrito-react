@@ -6,7 +6,7 @@ import productos from '../../products'
 
 function ItemList() {
     const [productsToDisplay, setProductsToDisplay] = useState([]);
-    const array = productos
+    const itemsArray = productos
     const { catId } = useParams()
 
     useEffect(() => {
@@ -15,16 +15,16 @@ function ItemList() {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     if (catId) {
-                        let filtered = array.filter(el => el.category === catId)
+                        let filtered = itemsArray.filter(el => el.category === catId)
                         resolve(filtered)
                     } else {
-                        resolve(array)
+                        resolve(itemsArray)
                     }
                 }, 2000)
             })
         }
         productsPromise().then(resolve => setProductsToDisplay(resolve))
-    }, [catId, array])
+    }, [catId, itemsArray])
 
     return (
         <div id="itemList">
