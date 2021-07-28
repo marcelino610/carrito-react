@@ -7,7 +7,7 @@ import add from '../add.png'
 
 function ItemCount({ product, onAdd  }) {
     const [count, setCount] = useState(0)
-    const { cart } = useContext(CartContext)
+    //const { cart } = useContext(CartContext)
     const { addItem } = useContext(CartContext)
     const { removeItem } = useContext(CartContext)
     const { setCart } = useContext(CartContext)
@@ -20,9 +20,10 @@ function ItemCount({ product, onAdd  }) {
                 <img className={count === product.stock ? "disabled" : ""} src={add} onClick={() => { count === product.stock ? setCount(count) : setCount(count + 1) }} height="20px" width="20px" alt="mas item" />
             </div>
             <button onClick={() => {
-                //onAdd(count)
+                onAdd(count)
+                
                 addItem(product, count)
-                console.log(cart)
+                //console.log(cart)
                 }}>
                 Agregar al carrito
                 </button>
