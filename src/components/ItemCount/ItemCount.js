@@ -7,10 +7,7 @@ import add from '../add.png'
 
 function ItemCount({ product, onAdd  }) {
     const [count, setCount] = useState(0)
-    //const { cart } = useContext(CartContext)
     const { addItem } = useContext(CartContext)
-    const { removeItem } = useContext(CartContext)
-    const { setCart } = useContext(CartContext)
 
     return (
         <div id="count-container">
@@ -21,9 +18,7 @@ function ItemCount({ product, onAdd  }) {
             </div>
             <button onClick={() => {
                 onAdd(count)
-                
-                addItem(product, count)
-                //console.log(cart)
+                addItem({...product, "quantity": count})
                 }}>
                 Agregar al carrito
                 </button>

@@ -4,10 +4,9 @@ export const CartContext = React.createContext()
 function CartContextProvider({ children }) {
     const [cart, setCart] = useState([])
     console.log(cart)
-    console.log(typeof(cart))
 
-    function isInCart(it) {//recibe un objeto
-        return cart.find(el => it.id === el.id) ? true : false
+    function isInCart(it) {
+        return cart.findIndex(el => el.id === it.id) !== -1 ? true : false
     }
 
     function clear() {
@@ -15,30 +14,17 @@ function CartContextProvider({ children }) {
     }
 
     function removeItem(id) {
-        const itemIndex = cart.indexOf(el => id === el.id)
-        cart.splice(itemIndex, 0)
+        const itemIndex = cart.findIndex(el => el.id === id)
+        const smallerCart = cart.splice(itemIndex, 0)
+        setCart(smallerCart)
     }
 
-    function addItem(item, quantity) {
-        console.log(cart, typeof(cart))
-        let givenCart = cart
-        console.log('givenCart: ' + givenCart)
-        let newCart = givenCart.push({product: item, howMuch: quantity})
-        console.log('newCart: ' + newCart)
-        //isInCart(item) ? console.log('el item ya se encuentra en el carrito') : cart.push({product: item, howMuch: quantity})
-        isInCart(item) ? console.log('el item ya se encuentra en el carrito') : setCart(newCart)
-        console.log(cart)
-        //si comentamos la línea 23 y hacemos correr la 24, luego de agregar un item
-        //los log de las líneas 6 y 7 imprimen '1' y 'number' respectivamente
-        //por esto manejo 'cart' como una variable común de JavaScript
-
+    function addItem(item) {
+        !isInCart(item) && setCart([...cart, item])
     }
-
+    
     return (
-        <CartContext.Provider value={{ cart, setCart, addItem, removeItem, clear }}>
-            {
-                //es necesario pasar 'isInCart' o sólo si lo uso fuera de este componente?
-            }
+        <CartContext.Provider value={{ cart, setCart, addItem, removeItem, clear, isInCart }}>
             {children}
         </CartContext.Provider>)
 }
