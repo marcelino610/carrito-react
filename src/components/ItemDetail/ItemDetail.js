@@ -13,7 +13,7 @@ function ItemDetail(props) {
         <div id="info-container">
             <div id="img">
                 <div>
-                    <img src={props.imgSrc} alt="imagen de producto"/>
+                    <img src={props.imgSrc} alt="imagen de producto" />
                 </div>
             </div>
             <div id="info">
@@ -26,7 +26,13 @@ function ItemDetail(props) {
                 <h2>
                     <p>${props.price}</p>
                 </h2>
-                {addToCart ? <Link to='/cart'><button>Terminar mi compra</button></Link> : <ItemCount product={props} onAdd={finish} />}
+                {addToCart ? (
+                    <div>
+                        <Link to='/'><button>Volver</button></Link> <Link to='/cart'><button>Terminar mi compra</button></Link>
+                    </div>
+                ) : (
+                    <ItemCount product={props} onAdd={finish} />
+                )}
             </div>
         </div>
     )

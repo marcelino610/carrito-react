@@ -8,6 +8,7 @@ import add from '../add.png'
 function ItemCount({ product, onAdd  }) {
     const [count, setCount] = useState(0)
     const { addItem } = useContext(CartContext)
+    const { cart } = useContext(CartContext)
 
     return (
         <div id="count-container">
@@ -19,6 +20,7 @@ function ItemCount({ product, onAdd  }) {
             <button onClick={() => {
                 onAdd(count)
                 addItem({...product, "quantity": count})
+                console.log(cart)
                 }}>
                 Agregar al carrito
                 </button>

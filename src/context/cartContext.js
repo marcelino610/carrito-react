@@ -14,13 +14,42 @@ function CartContextProvider({ children }) {
     }
 
     function removeItem(id) {
-        const itemIndex = cart.findIndex(el => el.id === id)
-        const smallerCart = cart.splice(itemIndex, 0)
-        setCart(smallerCart)
+        let newCart = [...cart]
+        let index = cart.findIndex(el => el.id === id)
+        //recurro a un switch porque newCart.splice(...) no me funcionaba correctamente
+        switch (index) {
+            case 0:
+                newCart = newCart.slice(1, newCart.length)
+                console.log('caso 0: ', newCart)
+                setCart(newCart)
+                console.log(cart)
+                break;
+            case (newCart.length - 1):
+                newCart = newCart.slice(0, newCart.length - 1)
+                console.log('caso final: ', newCart)
+                setCart(newCart)
+                console.log(cart)
+                break;
+        
+            default:
+                newCart = newCart.slice(0, index).concat(newCart.slice(index + 1, newCart.length))
+                console.log('caso medio: ', newCart)
+                setCart(newCart)
+                console.log(cart)
+                break;
+        }
     }
 
     function addItem(item) {
-        !isInCart(item) && setCart([...cart, item])
+        if (!isInCart(item)) {
+            setCart([...cart, item])
+        } else {
+            const newCart = [...cart]
+            newCart.map(el => {
+                el.id === item.id && (el.quantity = item.quantity)
+            })
+            setCart(newCart)
+        }
     }
     
     return (

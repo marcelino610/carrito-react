@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css';
 import '../my-css.css'
 import CartWidget from '../CartWidget/CartWidget'
+import { CartContext } from '../../context/cartContext'
 
 function NavBar() {
+    const { cart } = useContext(CartContext)
+
     return (
         <nav>
         <Link to="/">
@@ -21,7 +24,7 @@ function NavBar() {
                 <p className="text-18">Accesorios</p>
             </NavLink>
             </div>
-            <CartWidget size="50px" alt="Carrito" />
+            {cart.length !== 0 && <CartWidget size="50px" alt="Carrito" />}
         </nav>
     )
 };
