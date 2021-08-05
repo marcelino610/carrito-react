@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import {useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Item from './Item/Item'
 import './itemlist-css.css'
-import productos from '../../products'
+import { database } from '../../../firebase'
 
 function ItemList() {
     const [productsToDisplay, setProductsToDisplay] = useState([]);
-    const itemsArray = productos
     const { catId } = useParams()
 
-    useEffect(() => {
-        setProductsToDisplay([])
-        const productsPromise = () => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    if (catId) {
-                        let filtered = itemsArray.filter(el => el.category === catId)
-                        resolve(filtered)
-                    } else {
-                        resolve(itemsArray)
-                    }
-                }, 2000)
-            })
+    const getProducts = () => {
+        const products = database.collection('productos')
+        if (catId) {
+            let byCategory = products.where('category', '==', catId)
+            byCategory.get().then(query => setProductsToDisplay(query.docs.map(el => {
+                return { ...el.data(), id: el.data().id }
+            })))
+        } else {
+            products.get().then(query => setProductsToDisplay(query.docs.map(el => {
+                return { ...el.data(), id: el.data().id }
+            })))
         }
-        productsPromise().then(resolve => setProductsToDisplay(resolve))
-    }, [catId, itemsArray])
+    }
+    useEffect(() => {
+        getProducts()
+    }, [catId]);
 
     return (
         <div id="itemList">

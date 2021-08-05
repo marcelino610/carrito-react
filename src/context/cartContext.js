@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 export const CartContext = React.createContext()
 function CartContextProvider({ children }) {
     const [cart, setCart] = useState([])
-    console.log(cart)
 
     function isInCart(it) {
         return cart.findIndex(el => el.id === it.id) !== -1 ? true : false
@@ -20,22 +19,16 @@ function CartContextProvider({ children }) {
         switch (index) {
             case 0:
                 newCart = newCart.slice(1, newCart.length)
-                console.log('caso 0: ', newCart)
                 setCart(newCart)
-                console.log(cart)
                 break;
             case (newCart.length - 1):
                 newCart = newCart.slice(0, newCart.length - 1)
-                console.log('caso final: ', newCart)
                 setCart(newCart)
-                console.log(cart)
                 break;
         
             default:
                 newCart = newCart.slice(0, index).concat(newCart.slice(index + 1, newCart.length))
-                console.log('caso medio: ', newCart)
                 setCart(newCart)
-                console.log(cart)
                 break;
         }
     }
@@ -46,7 +39,7 @@ function CartContextProvider({ children }) {
         } else {
             const newCart = [...cart]
             newCart.map(el => {
-                el.id === item.id && (el.quantity = item.quantity)
+                return el.id === item.id && (el.quantity = item.quantity)
             })
             setCart(newCart)
         }

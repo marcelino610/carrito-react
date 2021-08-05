@@ -1,5 +1,4 @@
 import React from 'react'
-import ItemCount from '../../../ItemCount/ItemCount'
 import './item-css.css'
 import { NavLink } from 'react-router-dom'
 

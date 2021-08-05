@@ -1,27 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import './itDetContainer-css.css'
 import ItemDetail from '../ItemDetail/ItemDetail'
-import Productos from '../products'
+import { database } from '../../firebase'
 
 function ItemDetailContainer(props) {
     const [details, setDetails] = useState(false)
     const { id } = useParams()
 
     const getDetails = () => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                let detailsRequired = Productos.filter(el => el.id == id)//'el.id' es number y 'id' es string, por eso '==' en lugar de '==='
-                resolve(detailsRequired[0])
-            }, 2000)
+        let products = database.collection('productos')
+        products.get().then(query => {
+            setDetails(query.docs.filter(el => el.data().id == id)[0].data())
         })
     }
-    getDetails().then(resolve => setDetails(resolve))
+    useEffect(() => {
+        getDetails()
+    }, [id]);
 
     return details ? (
-    <div>
-        <ItemDetail id={details.id} title={details.title} price={details.price} description={details.description} imgSrc={details.imageUrl} stock={details.stock} />
-    </div>
+        <div>
+            <ItemDetail id={details.id} title={details.title} price={details.price} description={details.description} imgSrc={details.imageUrl} stock={details.stock} />
+        </div>
     ) : (
         <div></div>
     )
