@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 export const CartContext = React.createContext()
 function CartContextProvider({ children }) {
@@ -25,7 +25,7 @@ function CartContextProvider({ children }) {
                 newCart = newCart.slice(0, newCart.length - 1)
                 setCart(newCart)
                 break;
-        
+
             default:
                 newCart = newCart.slice(0, index).concat(newCart.slice(index + 1, newCart.length))
                 setCart(newCart)
@@ -44,7 +44,7 @@ function CartContextProvider({ children }) {
             setCart(newCart)
         }
     }
-    
+
     return (
         <CartContext.Provider value={{ cart, setCart, addItem, removeItem, clear, isInCart }}>
             {children}
