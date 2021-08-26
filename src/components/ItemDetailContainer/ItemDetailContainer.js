@@ -18,7 +18,9 @@ function ItemDetailContainer(props) {
     const getDetails = () => {
         let products = database.collection('productos')
         products.get().then(query => {
-            setDetails(query.docs.filter(el => toString(el.data().id) === toString(id))[0].data())
+            setDetails(query.docs.filter(el => {
+                return el.data().id === parseInt(id)
+            })[0].data())
         })
     }
     useEffect(() => {
