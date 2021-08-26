@@ -4,8 +4,6 @@ import Cart from './shopping-cart.png';
 import './CartWidget.css';
 import { CartContext } from '../../context/cartContext';
 
-import Image from 'react-bootstrap/Image';
-
 function CartWidget(props) {
     const { cart } = useContext(CartContext)
     let totalItemsInCart = cart.map(el => el.quantity)

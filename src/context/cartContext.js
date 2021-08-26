@@ -15,7 +15,6 @@ function CartContextProvider({ children }) {
     function removeItem(id) {
         let newCart = [...cart]
         let index = cart.findIndex(el => el.id === id)
-        //recurro a un switch porque newCart.splice(...) no me funcionaba correctamente
         switch (index) {
             case 0:
                 newCart = newCart.slice(1, newCart.length)

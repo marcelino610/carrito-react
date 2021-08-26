@@ -27,3 +27,19 @@
 * React Router DOM
 * React Bootstrap
 * Firestore Database - Firebase
+
+
+## Deploy
+
+Para ver este proyecto en funcionamiento, hacer click [aquí](https://bowshop.netlify.app/).
+
+Si quiere testearlo de forma local, siga estos pasos:
+
+* Clone este repositorio
+* En la terminal, navegue al directorio del repositorio
+* Corra el comando **npm i**
+* Una vez finalizado este proceso, corra el comando **npm start**
+* El proyecto debería poder verse ahora en su navegador
+
+
+*Desarrollado por Marcelino Bazzana*

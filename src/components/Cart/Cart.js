@@ -120,7 +120,7 @@ function Cart() {
                                     <Col md={3}>
                                         <Row className='justify-content-center'>
                                             <Col md={10}>
-                                                <Button variant='success' onClick={() => setFinishPurchase(!finishPurchase)}>Finalizar compra</Button>{/* este botón debe mostrar alert de 'compra realizada' y vaciar el carrito */}
+                                                <Button variant='success' onClick={() => setFinishPurchase(!finishPurchase)}>Finalizar compra</Button>
                                             </Col>
                                         </Row>
                                     </Col>
