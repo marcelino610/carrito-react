@@ -71,3 +71,28 @@
     justify-content: center;
     align-items: center;
 }
+
+/* MARGENES */
+.mt-5 {
+    margin-top: 5%;
+}
+.mt-3 {
+    margin-top: 3%;
+}
+
+.rr-link { /* react-router links */
+    text-decoration: none;
+    color: inherit;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.red {
+    color: red;
+}
+
+.invisible {
+    visibility: hidden;
+}

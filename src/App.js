@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavBar from './components/Navbar/NavBar'
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
@@ -11,10 +11,7 @@ function App() {
     <CartContextProvider>
       <BrowserRouter>
         <div className="App">
-          <div>
             <NavBar />
-          </div>
-          <div>
             <Switch>
               <Route exact path="/">
                 <ItemListContainer />
@@ -29,7 +26,6 @@ function App() {
                 <Cart />
               </Route>
             </Switch>
-          </div>
         </div>
       </BrowserRouter>
     </CartContextProvider>

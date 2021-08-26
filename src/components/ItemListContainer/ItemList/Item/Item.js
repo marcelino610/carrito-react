@@ -1,18 +1,26 @@
-import React from 'react'
-import './item-css.css'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import '../../../my-css.css'
+import { Link } from 'react-router-dom';
+
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
 function Item({ itemId, itemTitle, itemPrice, itemImageUrl, stock }) {
     return (
-        <div className="item-card" id={ itemId }>
-            <div className="img-container">
-                <img src={ itemImageUrl } height="144px" width="233px" alt="Imagen del producto"/>
-            </div>
-            <div className="info-container">
-                <h2><NavLink to={`/item/${itemId}`}>{ itemTitle }</NavLink></h2>
-                <h3>${ itemPrice }</h3>
-            </div>
-        </div>
+        <Col md={3} id={itemId} className='mt-3'>
+            <Card>
+                <Card.Img variant='top' src={itemImageUrl} alt="Imagen del producto" />
+                <Card.Body>
+                    <Card.Title className='text-center'>
+                        <Link to={`/item/${itemId}`} className='rr-link'>
+                            {itemTitle}
+                        </Link>
+                    </Card.Title>
+                    <Card.Subtitle className='text-center'>
+                        ${itemPrice}
+                    </Card.Subtitle>
+                </Card.Body></Card>
+        </Col>
     )
 }
 

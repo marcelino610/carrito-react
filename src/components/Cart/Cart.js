@@ -1,9 +1,16 @@
-import React, { useContext, useState } from 'react'
-import { CartContext } from '../../context/cartContext'
-import { Link } from 'react-router-dom'
-import '../my-css.css'
-import CartItem from '../CartItem/CartItem'
+import React, { useContext, useState } from 'react';
+import { CartContext } from '../../context/cartContext';
+import { Link } from 'react-router-dom';
+import '../my-css.css';
+import CartItem from '../CartItem/CartItem';
+import CartForm from './CartForm';
 import { database } from '../../firebase';
+
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 
 function Cart() {
     const { cart } = useContext(CartContext)
@@ -16,16 +23,19 @@ function Cart() {
 
     function buy(ev, total) {
         ev.preventDefault()
-        database.collection('ventas').doc().set({
+        database.collection('ventas').add({
             buyer: {
                 name: ev.target.name.value,
                 phone: ev.target.phone.value,
                 email: ev.target.mail.value
             },
             products: cart.map(el => ({ id: el.id, title: el.title, price: el.price, quantity: el.quantity })),
-            date: 'timeStamp',
+            date: toString(new Date()),
             total: total
         })
+            .then(
+                doc => alert('Gracias por tu compra \n Tu número de compra es: ' + doc.id)
+            )
 
         let products = database.collection('productos')
 
@@ -53,47 +63,87 @@ function Cart() {
 
                 clear()
                 setFinishPurchase(!finishPurchase)
-                alert('Gracias por tu compra!!')
             })
 
     }
 
     return (
-        <div>
-
-            {cart.length !== 0 ? (
-                finishPurchase ? (
-                    <form onSubmit={(ev) => buy(ev, total)} style={{ 'display': 'flex', 'flexDirection': 'column' }}>
-                        <label>Nombre</label>
-                        <input id='name' placeholder='Nombre' />
-                        <label>Número de contacto</label>
-                        <input id='phone' placeholder='Teléfono' />
-                        <label>Correo de cntacto</label>
-                        <input id='mail' placeholder='Mail' />
-                        <button type='submit'>Finalizar</button>
-                    </form>
+        <Row className='justify-content-center mt-5'>
+            <Col md={8}>
+                {cart.length !== 0 ? (
+                    finishPurchase ? (
+                        <CartForm total={total} buy={buy} />
+                    ) : (
+                        <Card>
+                            <ListGroup variant='flush' as='ul'>
+                                <ListGroup.Item>
+                                    <Row>
+                                        <Col md={5}>
+                                            <h2 className='text-center'>Artículo</h2>
+                                        </Col>
+                                        <Col md={2}>
+                                            <h2 className='text-center'>Precio</h2>
+                                        </Col>
+                                        <Col md={3}>
+                                            <h2 className='text-center'>Cantidad</h2>
+                                        </Col>
+                                        <Col md={2}>
+                                            <h2> </h2>
+                                        </Col>
+                                    </Row>
+                                </ListGroup.Item>
+                                {
+                                    cart.map(el => <CartItem key={el.id} id={el.id} title={el.title} price={el.price} quantity={el.quantity} />)
+                                }
+                            </ListGroup>
+                            <Card.Footer>
+                                <Card.Subtitle className='text-center'>
+                                    <b>Total: </b>${total}
+                                </Card.Subtitle>
+                                <Row className='justify-content-around mt-3'>
+                                    <Col md={3}>
+                                        <Row className='justify-content-center'>
+                                            <Col md={9}>
+                                            <Link to='/'>
+                                                <Button variant='secondary'>Volver</Button>
+                                            </Link>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col md={3}>
+                                        <Row className='justify-content-center'>
+                                            <Col md={9}>
+                                                <Button variant='secondary' onClick={() => clear()}>Vaciar carrito</Button>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col md={3}>
+                                        <Row className='justify-content-center'>
+                                            <Col md={10}>
+                                                <Button variant='success' onClick={() => setFinishPurchase(!finishPurchase)}>Finalizar compra</Button>{/* este botón debe mostrar alert de 'compra realizada' y vaciar el carrito */}
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            </Card.Footer>
+                        </Card>
+                    )
                 ) : (
-                    <div>
-                        <ul>
-                            {
-                                cart.map(el => <CartItem key={el.id} id={el.id} title={el.title} price={el.price} quantity={el.quantity} />)
-                            }
-                        </ul>
-                        <h4>Total: ${total}</h4>
-                        <button onClick={() => setFinishPurchase(!finishPurchase)}>Finalizar compra</button>{/* este botón debe mostrar alert de 'compra realizada' y vaciar el carrito */}
-                        <br />
-                        <button onClick={() => clear()}>Vaciar carrito</button>
-                    </div>
-                )
-            ) : (
-                <div>
-                    <h3>No hay items en tu carrito</h3>
-                    <Link to='/'>
-                        <button>Volver</button>
-                    </Link>
-                </div>
-            )}
-        </div>
+                    <Card style={{ 'border': 'none' }}>
+                        <Card.Title className='text-center'>
+                            No hay items en tu carrito
+                        </Card.Title>
+                        <Row className='justify-content-center'>
+                            <Col md={1}>
+                                <Link to='/' className='rr-link'>
+                                    <Button variant='secondary' className='text-center'>Volver</Button>
+                                </Link>
+                            </Col>
+                        </Row>
+                    </Card>
+                )}
+            </Col>
+        </Row>
     )
 }
 

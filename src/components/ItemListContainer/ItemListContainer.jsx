@@ -1,6 +1,5 @@
-import React from 'react'
-import ItemList from './ItemList/ItemList'
-import './item-list-container.css'
+import React from 'react';
+import ItemList from './ItemList/ItemList';
 
 function ItemListContainer() {
 

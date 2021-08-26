@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Item from './Item/Item'
-import './itemlist-css.css'
 import { database } from '../../../firebase'
+
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
 function ItemList() {
     const [productsToDisplay, setProductsToDisplay] = useState([]);
@@ -26,9 +28,11 @@ function ItemList() {
     }, [catId]);
 
     return (
-        <div id="itemList">
-            {productsToDisplay.map(el => <Item key={el.id} itemId={el.id} itemTitle={el.title} itemPrice={el.price} itemImageUrl={el.imageUrl} stock={el.stock} />)}
-        </div>
+        <Container>
+            <Row>
+                {productsToDisplay.map(el => <Item key={el.id} itemId={el.id} itemTitle={el.title} itemPrice={el.price} itemImageUrl={el.imageUrl} stock={el.stock} />)}
+            </Row>
+        </Container>
     )
 }
 
