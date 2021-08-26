@@ -18,11 +18,12 @@ function ItemDetailContainer(props) {
     const getDetails = () => {
         let products = database.collection('productos')
         products.get().then(query => {
-            setDetails(query.docs.filter(el => el.data().id == id)[0].data())
+            setDetails(query.docs.filter(el => toString(el.data().id) === toString(id))[0].data())
         })
     }
     useEffect(() => {
         getDetails()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     return details ? (

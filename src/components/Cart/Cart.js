@@ -54,7 +54,7 @@ function Cart() {
             .then(productsIdsQuery => {
                 cart.forEach(async el => {
                     let itemDbId = ''
-                    productsIdsQuery.forEach(idElem => (idElem[0] == el.id) && (itemDbId = idElem[1]))
+                    productsIdsQuery.forEach(idElem => (idElem[0] === toString(el.id)) && (itemDbId = idElem[1]))
                     let itemStock = await products.doc(`${itemDbId}`).get().then(query => query.data().stock)
                     products.doc(`${itemDbId}`).update({
                         stock: itemStock - el.quantity
